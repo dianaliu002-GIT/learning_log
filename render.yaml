@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: learning-log
+    env: python
+    plan: free
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn learning_log.wsgi:application"
+    envVars:
+      - key: DEBUG
+        value: false
+      - key: SECRET_KEY
+        generateValue: true

@@ -1,0 +1,19 @@
+{% extends "learning_logs/base.html" %}
+{% load django_bootstrap5 %}  <!-- 加载标签库 -->
+
+{% block header %}
+  <h2>添加新条目</h2>
+  <p>主题：{{ topic.text }}</p>  <!-- 显示当前条目所属的主题 -->
+{% endblock header %}
+
+{% block content %}
+  <!-- 表单提交到当前主题的添加条目URL -->
+  <form action="{% url 'learning_logs:new_entry' topic.id %}" method="post" class="form">
+    {% csrf_token %}
+    <!-- 用 bootstrap_form 渲染表单，自动应用 Bootstrap 样式 -->
+    {% bootstrap_form form %}
+    
+    <!-- 提交按钮（使用原生 Bootstrap 样式，避免标签冲突） -->
+    <button type="submit" class="btn btn-primary">添加条目</button>
+  </form>
+{% endblock content %}
