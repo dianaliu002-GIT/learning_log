@@ -17,9 +17,11 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('users/', include('users.urls')), 
-    path('learning_logs/', include('learning_logs.urls'))
+    path('learning_logs/', include('learning_logs.urls')),
+    path('', RedirectView.as_view(url='/learning_logs/')),
 ]
