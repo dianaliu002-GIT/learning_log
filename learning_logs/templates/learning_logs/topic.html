@@ -7,23 +7,23 @@
 {% block content %}
 
   <p>
-    <a href="{% url 'learning_logs:new_entry' topic.id %}">add new entry</a>
+    <a href="{% url 'learning_logs:new_entry' topic.id %}" class="btn btn-primary">add new entry</a>
   </p>
 
   {% for entry in entries %}
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3>
+    <div class="card mb-3">
+      <div class="card-header">
+        <h5 class="card-title mb-0">
           {{ entry.date_added|date:'M d, Y:i' }}
-          <small>
-            <a href="{% url 'learning_logs:edit_entry' entry.id %}">edit entry</a>
+          <small class="text-muted">
+            <a href="{% url 'learning_logs:edit_entry' entry.id %}" class="ms-2">edit entry</a>
           </small>
-        </h3>
+        </h5>
       </div>
-      <div class="panel-body">
-        {{ entry.text|linebreaks}}
+      <div class="card-body">
+        <p class="card-text">{{ entry.text|linebreaks }}</p>
       </div>
-    </div> <!-- panel -->
+    </div> <!-- card -->
   {% empty %}
       There are no entries for this topic yet.
   {% endfor %}
