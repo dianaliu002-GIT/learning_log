@@ -9,13 +9,23 @@
 
   <form method="post" action="{% url 'users:login' %}" class="form">
     {% csrf_token %}
-    {% bootstrap_form form %}
     
-    <div class="form-group">
-    <button type="submit" class="btn btn-primary">login</button>
+    <!-- 手动创建表单字段 -->
+    <div class="mb-3">
+      <label for="id_username" class="form-label">Username:</label>
+      <input type="text" name="username" class="form-control" id="id_username" required>
     </div>
     
-    <input type="hidden" name="next" value="{% url 'learning_logs:topics' %}" />
+    <div class="mb-3">
+      <label for="id_password" class="form-label">Password:</label>
+      <input type="password" name="password" class="form-control" id="id_password" required>
+    </div>
+    
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">login</button>
+    </div>
+    
+    <input type="hidden" name="next" value="{% url 'learning_logs:index' %}" />
   </form>
   
 {% endblock content %}
