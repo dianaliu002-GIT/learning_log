@@ -62,7 +62,7 @@ ROOT_URLCONF = "learning_log.urls"
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -139,6 +139,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CSRF_COOKIE_SECURE = False  # 关键！本地 HTTP 环境必须设为 False
 
 # 我的设置
+#LOGIN_REDIRECT_URL = 'learning_logs:topics'
 LOGIN_URL = '/users/login/'
 
 
