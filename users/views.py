@@ -3,6 +3,29 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse  
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+
+def login_view(request):
+    if request.method == 'POST':
+        # 获取表单提交的用户名和密码
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        # 验证用户
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            # 验证成功：注册登录状态
+            login(request, user)
+            # 强制跳转到 topics 页面（无视 next 参数，确保跳转）
+            return redirect('learning_logs:topics')
+        else:
+            # 验证失败：返回登录页并提示错误
+            messages.error(request, '用户名或密码错误，请重新输入')
+            return render(request, 'users/login.html')
+    else:
+        # GET 请求：显示登录表单
+        return render(request, 'users/login.html')
 
 def logout_view(request):
     """注销用户"""
