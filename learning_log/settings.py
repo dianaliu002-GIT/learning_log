@@ -27,9 +27,22 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-^1@wn2jn8gycz+@oeie@@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ['learning-log-1nmm.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['learning-log-1nmm.onrender.com', 'localhost', '127.0.0.1', '.onrender.com']
 
+# 关键修复：添加以下安全配置
+CSRF_TRUSTED_ORIGINS = [
+    'https://learning-log-1nmm.onrender.com',
+    'https://*.onrender.com'
+]
 
+if not DEBUG:
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+else:
+    CSRF_COOKIE_SECURE = False
+    SESSION_COOKIE_SECURE = False
+    
 # Application definition
 
 INSTALLED_APPS = [
@@ -139,7 +152,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CSRF_COOKIE_SECURE = False  # 关键！本地 HTTP 环境必须设为 False
 
 # 我的设置
-#LOGIN_REDIRECT_URL = 'learning_logs:topics'
+LOGIN_REDIRECT_URL = 'learning_logs:topics'
 LOGIN_URL = '/users/login/'
 
 
